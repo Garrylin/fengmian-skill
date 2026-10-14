@@ -1,0 +1,4 @@
+interface:
+  display_name: "fengmian-skill · 通用封面制作"
+  short_description: "从一句主题开始引导新手制作大字封面，支持自选人物与横竖双画幅交付"
+  default_prompt: "使用 $fengmian-skill 帮我制作封面，我第一次使用，请根据我的主题一步步带我完成。"
