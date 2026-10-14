@@ -4,6 +4,45 @@
 
 这是给 AI 助手读取的工作说明，不是可以双击运行的软件，也不是图像模型。它负责引导、选文案、排版和验收；生成图片需要你使用的助手本身具有生图能力。支持参考图编辑时，才可以把你自己的照片用于封面。所用平台可能有额度或费用，本技能不附带额度。
 
+## 一句话安装
+
+如果你使用的 AI 助手具有联网、GitHub 访问和本地文件写入能力，可以直接复制下面这句话发送给它：
+
+> 请从 https://github.com/Garrylin/fengmian-skill 安装 `fengmian-skill`：先检查仓库内容和当前环境支持的用户级 Skills 目录；如果目标目录已存在，不要覆盖，先比较差异并询问我；安装后验证该 Skill 能被发现，并告诉我调用方式。若当前产品不支持持久安装，请明确说明并改为本次会话读取，不要声称已经安装成功。
+
+这条口令不是绕过权限的“万能安装链接”。它只有在当前助手能够下载文件并写入自己的 Skills 目录时，才会真正完成安装；安装过程中出现下载、写入或覆盖确认时，应由用户决定是否继续。
+
+### 各平台怎么说
+
+**Codex（桌面端或 CLI）**
+
+> 请把 https://github.com/Garrylin/fengmian-skill 安装为当前 Codex 的用户级 Skill，保留完整目录结构；若已有同名目录先不要覆盖。安装后检查 `SKILL.md` 是否能被发现，并告诉我是否需要新开任务。
+
+Codex 能读取 Skill 的名称、描述和完整说明，并在任务匹配或用户明确调用时加载它。安装后建议新开任务，再说“使用 `$fengmian-skill`，帮我做封面”。参见 [OpenAI Skills 说明](https://developers.openai.com/plugins/concepts/skills)。
+
+**Claude Code**
+
+> 请从 https://github.com/Garrylin/fengmian-skill 安装 `fengmian-skill` 到我的 Claude Code 用户级 Skills 目录 `~/.claude/skills/`；若已存在先比较差异，不要直接覆盖。安装后验证 `/fengmian-skill` 可以被发现。
+
+这里指具备终端和文件权限的 Claude Code，不是普通网页聊天。Claude Code 官方支持用户级目录 `~/.claude/skills/<skill-name>/SKILL.md`，也支持项目级 `.claude/skills/`。参见 [Claude Code Skills 文档](https://code.claude.com/docs/en/skills)。
+
+**WorkBuddy**
+
+> 请检查并从 https://github.com/Garrylin/fengmian-skill 安装 `fengmian-skill`。先审查仓库内容和权限；如果当前版本不能直接从 GitHub 安装，请下载完整 ZIP，并告诉我在“技能 → 添加技能 → 上传技能”中导入哪个文件。安装后验证它出现在“已安装”列表中。
+
+WorkBuddy 官方支持上传本地技能包，也支持在产品内查找或创建 Skill；不同版本是否能在对话中直接完成 GitHub 下载与安装，以实际权限提示为准。参见 [WorkBuddy 技能说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)。
+
+**DeepSeek**
+
+- 在使用 DeepSeek 模型的 Codex 中，按上面的 Codex 方式安装，Skill 由 Codex 承载。
+- 在支持 Agent Skills 的 Deep Code 中，可以发送：
+
+> 请从 https://github.com/Garrylin/fengmian-skill 安装 `fengmian-skill` 到用户级目录 `~/.agents/skills/`；若已存在先比较差异，不要覆盖。安装后验证该 Skill 能被发现。
+
+- 普通 DeepSeek 网页或手机对话如果没有本地文件和 Skills 安装入口，就不能永久安装。可以上传 `SKILL.md` 及 `references/` 文件，并说：“请在本次对话中读取并遵循这些封面制作说明”；这只对当前对话生效。Deep Code 的目录规则见 [DeepSeek 官方集成说明](https://api-docs.deepseek.com/quick_start/agent_integrations/deepcode/)。
+
+判断是否真的安装成功，只看三个结果：完整文件夹已经写入正确目录、助手能发现 `fengmian-skill`、新对话中可以正常调用。只回复“我已经理解”、只生成一段提示词或只读取 GitHub 页面，都不算安装完成。
+
 ## 开始使用
 
 1. 解压分享包，保留整个 `fengmian-skill` 文件夹及内部目录结构。发布到 GitHub 后，也可从仓库的 **Code → Download ZIP** 下载。找到直接包含 `SKILL.md` 的目录，将其命名为 `fengmian-skill`（去掉 GitHub 下载目录可能带的 `-main` 等分支后缀）。
